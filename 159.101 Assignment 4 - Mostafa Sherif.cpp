@@ -2,18 +2,17 @@
 
 #include <iostream>
 #include <string>
-#include <cstdio>
 
 using namespace std;
 
-string output;
 string text;
 string words[40];
 int text2words(int total);
 
 int main() {
     
-    int total, i, j;
+    int total, i, j, addspaces;
+    string output="";
     
     cout << "Enter a line of text: ";
     getline(cin, text);
@@ -24,15 +23,23 @@ int main() {
         getline(cin, text);
         total = text.length();
     }
-
-    j = text2words(total);
-
+    
+    j = text2words(total); //getting the number of words and separate them in an Array
+    addspaces = 40 - (total - j); // Spaces to add = max length - input ( removing input spaces ) 
+    
+    while ( addspaces>0){ // add spaces
+        for ( i=0;(i<j) && (addspaces>0);i++){
+        words[i]= words[i]+" ";
+        addspaces--;
+        }
+    }
 
     for (i = 0; i <= j; i++){
-        cout << words[i] << endl;
+        output = output + words[i];
         }
     
-    //cout << "1234567890123456789012345678901234567890" << endl;
+    cout << endl << "1234567890123456789012345678901234567890" << endl;
+    cout << output << endl;
 
     return 0;
 }
@@ -51,5 +58,4 @@ int text2words(int total) {
         }
     words[j] = word;
     return j;
-
 }
